@@ -1,22 +1,34 @@
-# Set iam member
+# terraform-gcp-set-iam-member-list
 
-This template set iam member in roles our custom roles.
+This module set iam member in roles our custom roles.
 
-From documentation terrarform [link](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam)
+## Usage
 
-## For running in linux
+Basic usage of this module is as follows:
 
-```bash
-cd set_iam_member
-terraform init
-terraform plan
+```hcl
+locals {
+  project_id = "YOUR_PROJECT_ID"
+
+  dict_iam_member = {
+    "id_1" = {
+      role   = "roles/role1"
+      member = "user:user1@test.com"
+    },
+    "id_2" = {
+      role   = "roles/role2"
+      member = "group:permission1a"
+    },
+    "id_3" = {
+      role   = "roles/role3"
+      member = "serviceAccount:sa_email"
+    },
+  }
+}
+
+module "create_premission" {
+  source          = "../"
+  project_id      = local.project_id
+  dict_iam_member = local.dict_iam_member
+}
 ```
-
-## Functions of each file in this template
-
-* main.tf -> using the resource
-* terraform.tf ->  declare modules used
-* terraform.tfvars -> set vars values
-* vars.tf -> declare vars for using em main.tf
-
-* This template an example, for inspirantiom in your project.
