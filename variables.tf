@@ -2,7 +2,7 @@ variable "dict_iam_member" {
   description = "Array  iam role and member"
   type = map(
     object({
-      role   = string
+      roles  = list(string)
       member = string
     })
   )
