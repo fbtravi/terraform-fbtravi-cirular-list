@@ -30,8 +30,8 @@ locals {
   }
 }
 
-module "create_premission" {
-  source          = "../"
+module "set-iam-member-list" {
+  source  = "fbtravi/set-iam-member-list/gcp"
   project_id      = local.project_id
   dict_iam_member = local.dict_iam_member
 }
